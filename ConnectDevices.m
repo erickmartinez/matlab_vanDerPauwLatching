@@ -9,10 +9,13 @@ function [h_k6221,h_k2400,h_lockin,h_arduino] = ConnectDevices(app)
     
     % Connecting to Arduino
     try
+        fprintf('Connecting to a
         h_arduino = arduino(app.ArduinoAddressEditField.Value)%,...
         app.ArduinoLamp.Color = [0 1 0];
     catch err
         arduino_error = err.message
+        fprintf('Error connecting to arduino:\n');
+        fprintf('%s\n',arduino_error);
         success = 0;
     end
     

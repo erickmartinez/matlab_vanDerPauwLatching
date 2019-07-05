@@ -1,0 +1,29 @@
+function latchingRelayReset(app)
+% Reset the state of all relays to the default position
+%   The pins in pinsOn will be switched to on
+%   while the pins in pinsOff will be switched to off
+
+    a = app.handle_arduino;
+    pinsOff = {'D2','D4','D6','D8','A0'};
+    period = 0.001;
+    fprintf('Reseting pins.\n');
+    for i=1:5
+%         fprintf('Switch position %d on.\n',i);
+%         writeDigitalPin(a,pinsOn{i},0);
+%         pause(period);
+%         writeDigitalPin(a,pinsOn{i},1);
+%         pause(period);
+%         writeDigitalPin(a,pinsOn{i},0);
+%         pause(period);
+%         configurePin(a,pinsOff{i},'Unset');
+        fprintf('Switch position %d off.\n',i);
+        writeDigitalPin(a,pinsOff{i},0);
+        pause(period);
+        writeDigitalPin(a,pinsOff{i},1);
+        pause(period);
+        writeDigitalPin(a,pinsOff{i},0);
+        pause(period);
+        configurePin(a,pinsOff{i},'Unset');
+    end 
+    clear a;
+end

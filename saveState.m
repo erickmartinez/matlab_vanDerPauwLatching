@@ -1,4 +1,5 @@
 function saveState(app)
+% Save configuration settings once the app is closed
     state.Path      = app.DirectoryTextArea.Value;
     state.FileTag   = app.FileTagEditField.Value;
     state.Freq      = app.FrequencyHzEditField.Value;

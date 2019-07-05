@@ -9,11 +9,11 @@ function [h_k6221,h_k2400,h_lockin,h_arduino] = ConnectDevices(app)
     
     % Connecting to Arduino
     try
-        fprintf('Connecting to a
+        fprintf('Connecting to arduino...\n');
         h_arduino = arduino(app.ArduinoAddressEditField.Value)%,...
         app.ArduinoLamp.Color = [0 1 0];
     catch err
-        arduino_error = err.message
+        arduino_error = err.message;
         fprintf('Error connecting to arduino:\n');
         fprintf('%s\n',arduino_error);
         success = 0;
@@ -21,6 +21,7 @@ function [h_k6221,h_k2400,h_lockin,h_arduino] = ConnectDevices(app)
     
     %Connecting to lock-in amplifier, if fail update connect_success
     try
+        fprintf('Connecting to SRS830 Lock-in amplifier...\n');
         h_lockin = gpib('KEYSIGHT',7,app.LockinAddressEditField.Value);
         set(h_lockin, 'Name', 'SRSLockin_GPIB');
         fopen(h_lockin);
@@ -45,7 +46,9 @@ function [h_k6221,h_k2400,h_lockin,h_arduino] = ConnectDevices(app)
         fprintf(h_lockin, 'DDEF 2,1,0'); % disp R and theta, no expand
         app.LockinLamp.Color = [0 1 0];
     catch err
-        LCR_error = err.identifier
+        LCR_error = err.identifier;
+        fprintf('Error connecting to arduino:\n');
+        fprintf('%s\n',LCR_error);
         success = 0;
     end
     

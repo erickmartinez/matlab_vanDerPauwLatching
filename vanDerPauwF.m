@@ -1,10 +1,9 @@
-function [F] = vanDerPauwF(R1234,R2341)
-    Rr  = R1234/R2341;
-    u   = (Rr-1)/(Rr+1);
+function [F] = vanDerPauwF(Q)
+    u   = (Q-1)/(Q+1);
     % Use the Newton-Raphson algorithm to find F
     % set initial value
     F0 = 0.5;
-    for i=1:100
+    for i=1:1000
         F = F0 - corrf(F0,u)/dcorrf(F0,u);
         F0 = F;
     end
